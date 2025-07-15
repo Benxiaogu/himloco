@@ -181,7 +181,7 @@ if __name__ == '__main__':
     EXPORT_POLICY = True
     RECORD_FRAMES = False
     MOVE_CAMERA = False
-    COMMAND_FIX = False
+    COMMAND_FIX = True
     RENDER = True
     args = get_args()
-    play(args, x_vel=0.6, y_vel=0.0, yaw_vel=0.0, height=0.28)
+    play(args, x_vel=1.0, y_vel=0.0, yaw_vel=0.0, height=0.28)

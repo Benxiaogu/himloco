@@ -101,6 +101,9 @@ class LeggedRobotCfg(BaseConfig):
         # decimation: Number of control action updates @ sim DT per policy DT
         decimation = 4
         hip_reduction = 1.0
+        # ratio: self.action = ratio * self.action + (1 - ratio) * last_actoin
+        action_smoothness = False # if true, actions are smoothed with a ratio
+        ratio = 0.9
 
     class asset:
         file = ""

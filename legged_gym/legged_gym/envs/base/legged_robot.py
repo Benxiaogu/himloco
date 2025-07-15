@@ -140,6 +140,10 @@ class LeggedRobot(BaseTask):
         if self.cfg.domain_rand.delay:
             for i in range(self.cfg.control.decimation):
                 self.delayed_actions[:, i] = self.last_actions + (self.actions - self.last_actions) * (i >= delay_steps)
+
+        if self.cfg.control.action_smoothness:
+            ratio = self.cfg.control.ratio
+            self.actions = ratio * self.actions + (1 - ratio) * self.last_actions
         # step physics and render each frame
         if self.cfg.control.control_test:
             self.render_keyboard_control()
@@ -807,6 +811,7 @@ class LeggedRobot(BaseTask):
         self.default_dof_pos = torch.zeros(self.num_dof, dtype=torch.float, device=self.device, requires_grad=False)
         for i in range(self.num_dofs):
             name = self.dof_names[i]
+            print(f"---------------i:{i}----------joint name: {name} -------------------------")
             angle = self.cfg.init_state.default_joint_angles[name]
             self.default_dof_pos[i] = angle
             found = False
